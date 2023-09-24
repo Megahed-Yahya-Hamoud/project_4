@@ -13,7 +13,6 @@ my.forEach(function(ele) {
 
 // ====================== ( action on button) =========================
 
-
 let myBtn=document.querySelector("#bt")
 
 myBtn.addEventListener("click" , ()=>{
@@ -22,25 +21,6 @@ myBtn.addEventListener("click" , ()=>{
         behavior:"smooth"
     })
 })
-
-//=========================== (fetch data) ======================
-
-async function fetchData(){
-    try{
-        let myData=document.querySelector(".myDiv")
-
-        fetch("https://jsonplaceholder.typicode.com/users").then((result)=>{
-        return result.json()
-    }).then((data)=>{
-    for (let index = 0; index < data.length; index++) {
-        myData.append(data[index].name+" | ");
-    }
-})
-    }catch (Error){
-        console.log(error);
-    }
-}
-fetchData()
 
 // =================== ( javaScript Search) ================
 
@@ -74,3 +54,39 @@ let nameJs=JSON.parse(object)
 for(let i=0 ;i<nameJs.length ;i++){
 console.log(nameJs[i].name);
 }
+
+
+// ===================================================================
+
+async function fetchData(){
+    try{
+    fetch("https://fakestoreapi.com/products").then((result)=>{
+        return result.json()
+    }).then((data)=>{      
+    for (let index = 0; index < 12; index++) {
+    const mySet=`
+    <div class="col">
+    <div class="data p-3">
+    <div class="text-center">
+    <img src="${data[index].image} " class="" height="150px" width="150px">
+    </div>
+    <p class="mt-3"><b>id</b> :<span class="text-danger"> ${data[index].id}</span> </p>
+    <p><b>title</b> : Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio impedit, imilique 
+    </p>
+    <p><b>price</b> : <span class="text-danger"> ${data[index].price}</span> </p>
+    <p><b>description </b>: 
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio impedit, imilique 
+    </p>
+    <p><b>category </b> : ${data[index].category} </p>
+    </div>
+    <div>
+    <br> 
+    `
+    document.querySelector(".fetch-data").insertAdjacentHTML("beforeend", mySet)
+    }
+})
+    }catch (Error){
+        console.log(Error);
+    }
+}
+fetchData()
